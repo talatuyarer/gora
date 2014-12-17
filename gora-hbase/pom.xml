@@ -92,6 +92,36 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>hadoop-1</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencyManagement>
+        <dependencies>       
+		    <dependency>
+		      <groupId>org.apache.hadoop</groupId>
+		      <artifactId>hadoop-test</artifactId>
+		      <scope>test</scope>
+		    </dependency>
+        </dependencies>
+      </dependencyManagement>    
+    </profile>
+    <profile>
+      <id>hadoop-2</id>
+      <dependencyManagement>
+        <dependencies>      
+		    <dependency>
+		      <groupId>org.apache.hadoop</groupId>
+		      <artifactId>hadoop-minicluster</artifactId>
+		      <scope>test</scope>
+		    </dependency>
+        </dependencies>
+      </dependencyManagement>    
+    </profile>    
+  </profiles>
+
   <dependencies>
     <!-- Gora Internal Dependencies -->
     <dependency>
@@ -107,7 +137,6 @@
       <scope>test</scope>
     </dependency>
     <!-- END of Gora Internal Dependencies -->
-
     <dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-client</artifactId>
@@ -119,7 +148,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>org.apache.avro</groupId>
       <artifactId>avro</artifactId>
@@ -170,19 +198,12 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
+	<dependency>
       <groupId>org.apache.hbase</groupId>
       <artifactId>hbase-testing-util</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
-    </dependency>
+    </dependency>         
     <!-- END of Testing Dependencies -->
   </dependencies>
 

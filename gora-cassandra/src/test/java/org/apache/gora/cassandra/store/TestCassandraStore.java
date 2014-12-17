@@ -31,7 +31,6 @@ import org.apache.gora.examples.generated.WebPage;
 import org.apache.gora.store.DataStore;
 import org.apache.gora.store.DataStoreFactory;
 import org.apache.gora.store.DataStoreTestBase;
-import org.apache.hadoop.conf.Configuration;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -39,8 +38,6 @@ import org.junit.Ignore;
  * Test for CassandraStore.
  */
 public class TestCassandraStore extends DataStoreTestBase{
-
-  private Configuration conf;
 
   static {
     setTestDriver(new GoraCassandraTestDriver());
@@ -54,13 +51,13 @@ public class TestCassandraStore extends DataStoreTestBase{
   @SuppressWarnings("unchecked")
   @Override
   protected DataStore<String, Employee> createEmployeeDataStore() throws IOException {
-    return DataStoreFactory.getDataStore(CassandraStore.class, String.class, Employee.class, conf);
+    return DataStoreFactory.getDataStore(CassandraStore.class, String.class, Employee.class);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   protected DataStore<String, WebPage> createWebPageDataStore() throws IOException {
-    return DataStoreFactory.getDataStore(CassandraStore.class, String.class, WebPage.class, conf);
+    return DataStoreFactory.getDataStore(CassandraStore.class, String.class, WebPage.class);
   }
 
   public GoraCassandraTestDriver getTestDriver() {

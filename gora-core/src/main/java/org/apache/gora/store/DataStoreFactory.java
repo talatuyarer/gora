@@ -205,6 +205,23 @@ public class DataStoreFactory{
   /**
    * Instantiate a new {@link DataStore}. Uses default properties. Uses 'null' schema.
    * 
+   * @param dataStoreClass The datastore implementation class.
+   * @param keyClass The key class.
+   * @param persistentClass The value class.
+   * @param conf {@link Configuration} to be used be the store.
+   * @return A new store instance.
+   * @throws GoraException
+   */
+  public static <D extends DataStore<K,T>, K, T extends Persistent>
+  D getDataStore( Class<D> dataStoreClass, Class<K> keyClass,
+      Class<T> persistentClass) throws GoraException {
+
+    return createDataStore(dataStoreClass, keyClass, persistentClass, new Configuration(), createProps(), null);
+  }
+  
+  /**
+   * Instantiate a new {@link DataStore}. Uses default properties. Uses 'null' schema.
+   * 
    * @param dataStoreClass The datastore implementation class <i>as string</i>.
    * @param keyClass The key class.
    * @param persistentClass The value class.
@@ -277,6 +294,11 @@ public class DataStoreFactory{
     return createDataStore(c, keyClass, persistent, conf, createProps, null);
   }
 
+  public static <K, T extends Persistent> DataStore<K, T> getDataStore(
+    Class<K> keyClass, Class<T> persistent) throws GoraException {
+      return getDataStore(keyClass, persistent, new Configuration());
+  }
+  
   /**
    * Tries to find a property with the given baseKey. First the property
    * key constructed as "gora.&lt;classname&gt;.&lt;baseKey&gt;" is searched.

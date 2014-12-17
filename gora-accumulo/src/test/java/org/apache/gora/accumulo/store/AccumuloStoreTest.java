@@ -23,7 +23,6 @@ import org.apache.gora.examples.generated.WebPage;
 import org.apache.gora.store.DataStore;
 import org.apache.gora.store.DataStoreFactory;
 import org.apache.gora.store.DataStoreTestBase;
-import org.apache.hadoop.conf.Configuration;
 import org.junit.Ignore;
 
 /**
@@ -35,12 +34,12 @@ public class AccumuloStoreTest extends DataStoreTestBase {
 
   @Override
   protected DataStore<String,Employee> createEmployeeDataStore() throws IOException {
-    return DataStoreFactory.getDataStore(String.class, Employee.class, new Configuration());
+    return DataStoreFactory.getDataStore(String.class, Employee.class);
   }
   
   @Override
   protected DataStore<String,WebPage> createWebPageDataStore() throws IOException {
-    return DataStoreFactory.getDataStore(String.class, WebPage.class, new Configuration());
+    return DataStoreFactory.getDataStore(String.class, WebPage.class);
   }
 
   
