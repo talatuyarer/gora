@@ -98,7 +98,6 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <dependencyManagement>
         <dependencies>       
 		    <dependency>
 		      <groupId>org.apache.hadoop</groupId>
@@ -106,11 +105,9 @@
 		      <scope>test</scope>
 		    </dependency>
         </dependencies>
-      </dependencyManagement>    
     </profile>
     <profile>
       <id>hadoop-2</id>
-      <dependencyManagement>
         <dependencies>      
 		    <dependency>
 		      <groupId>org.apache.hadoop</groupId>
@@ -118,7 +115,6 @@
 		      <scope>test</scope>
 		    </dependency>
         </dependencies>
-      </dependencyManagement>    
     </profile>    
   </profiles>
 
