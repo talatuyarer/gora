@@ -44,6 +44,7 @@ import org.apache.hadoop.hbase.client.RowMutations;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.coprocessor.Batch.Call;
 import org.apache.hadoop.hbase.client.coprocessor.Batch.Callback;
+import org.apache.hadoop.hbase.filter.CompareFilter.CompareOp;
 import org.apache.hadoop.hbase.ipc.CoprocessorRpcChannel;
 import org.apache.hadoop.hbase.util.Pair;
 
@@ -359,5 +360,12 @@ public class HBaseTableConnection implements HTableInterface {
   @Override
   public Object[] batch(List<? extends Row> actions) throws IOException, InterruptedException {
     return getTable().batch(actions);
+  }
+
+  @Override
+  public boolean checkAndMutate(byte[] arg0, byte[] arg1, byte[] arg2, CompareOp arg3, byte[] arg4,
+      RowMutations arg5) throws IOException {
+    // TODO Auto-generated method stub
+    return false;
   }
 }
