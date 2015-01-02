@@ -293,6 +293,15 @@
     </repository>
   </repositories-->
 
+
+<distributionManagement>
+  <repository>
+    <id>internal.repo</id>
+    <name>Temporary Staging Repository</name>
+    <url>file:///home/talat/workspace/maven-repo</url>
+  </repository>
+</distributionManagement>
+
   <build>
     <defaultGoal>install</defaultGoal>
     <directory>target</directory>
@@ -330,6 +339,7 @@
           <version>${maven-deploy-plugin.version}</version>
           <configuration>
             <updateReleaseInfo>true</updateReleaseInfo>
+            <altDeploymentRepository>internal.repo::default::file:///home/talat/workspace/maven-repo</altDeploymentRepository>
           </configuration>
         </plugin>
         <plugin>
@@ -422,6 +432,31 @@
             <fork>true</fork>
           </configuration>
         </plugin>
+		<plugin>
+			<groupId>com.github.github</groupId>
+			<artifactId>site-maven-plugin</artifactId>
+			<version>0.10</version>
+			<configuration>
+				<message>Maven artifacts for ${project.version}</message>  <!-- git commit mesajı -->
+				<!--* web sayfası işlemini devre dışı bırakır -->
+				<noJekyll>true</noJekyll> 
+				<outputDirectory>/home/talat/workspace/maven-repo</outputDirectory> <!-- distributionManagement tagındaki url ile uyuşmalı -->
+				<branch>refs/heads/master</branch>  <!-- karşı tarafta yüklemek istediğimiz branch adı -->
+				<includes><include>**/*</include></includes>
+				<merge>true</merge>  <!-- önceki veriyonları silmeden yeni versiyonu repoya eklemesi için -->
+				<repositoryName>maven-repo</repositoryName>	<!-- github repo ismi -->
+				<repositoryOwner>talatuyarer</repositoryOwner>  <!-- kullanıcı adınız  -->
+			</configuration>
+			<executions>
+				<!-- deploy pluginini çalıştırdığınızda otomatik olarak site plugininin de çalışması için -->
+				<execution>
+				<goals>
+					<goal>site</goal>
+				</goals>
+				<phase>deploy</phase>
+				</execution>
+			</executions>
+		</plugin>      
       </plugins>
     </pluginManagement>
     <plugins>
@@ -679,6 +714,7 @@
     <assembly.finalName>apache-${project.build.finalName}</assembly.finalName>
     <downloads.url>http://www.apache.org/dist/gora</downloads.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <github.global.server>github</github.global.server>
   </properties>
 
   <dependencyManagement>
